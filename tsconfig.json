@@ -1,34 +1,25 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "importHelpers": true,
-    "target": "es2018",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "removeComments": true,
-    "noImplicitAny": false,
-    "declaration": true,
-    "sourceMap": false,
-    "outDir": "dist",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
     "lib": [
       "es2018",
       "dom"
     ],
-    "baseUrl": "./"
-  },
-  "angularCompilerOptions": {
-    "skipTemplateCodegen": true,
-    "skipMetadataEmit": false,
-    "strictMetadataEmit": true,
-    "annotationsAs": "decorators"
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+    "paths": {
+      "ngx-daterangepicker-material": [
+        "dist/ngx-daterangepicker-material/ngx-daterangepicker-material",
+        "dist/ngx-daterangepicker-material"
+      ]
+    }
+  }
 }
