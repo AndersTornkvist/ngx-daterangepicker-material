@@ -129,6 +129,8 @@ export class DaterangepickerComponent implements OnInit {
     @Output('datesUpdated') datesUpdated: EventEmitter<Object>;
     @ViewChild('pickerContainer') pickerContainer: ElementRef;
 
+    daysOfWeek;
+
     constructor(
         private el: ElementRef,
         private _ref: ChangeDetectorRef,
@@ -142,21 +144,19 @@ export class DaterangepickerComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.locale.firstDay != 0) {
-            var iterator = this.locale.firstDay;
-            while (iterator > 0) {
-                this.locale.daysOfWeek.push(this.locale.daysOfWeek.shift());
-                iterator--;
-            }
+        if (this.locale.firstDay !== 0) {
+          this.daysOfWeek = this.locale.daysOfWeek.slice(this.locale.firstDay).concat(this.locale.daysOfWeek.slice(0, this.locale.firstDay));
+        } else {
+          this.daysOfWeek = this.locale.daysOfWeek;
         }
         if (this.inline) {
             this._old.start = this.startDate.clone();
             this._old.end = this.endDate.clone();
         }
-        if (!this.locale.format) { 
+        if (!this.locale.format) {
             if (this.timePicker) {
                 this.locale.format = moment.localeData().longDateFormat('lll');
-            } else { 
+            } else {
                 this.locale.format = moment.localeData().longDateFormat('L');
             }
         }
@@ -457,7 +457,7 @@ export class DaterangepickerComponent implements OnInit {
                 yearArrays: years
             };
         }
-        
+
         this._buildCells(calendar, side)
     }
     setStartDate(startDate) {
@@ -964,7 +964,7 @@ export class DaterangepickerComponent implements OnInit {
         this.updateElement();
         this.isShown = false;
         this._ref.detectChanges();
-        
+
     }
 
     /**
@@ -1021,7 +1021,7 @@ export class DaterangepickerComponent implements OnInit {
       return (areBothBefore || areBothAfter);
     }
     /**
-     * 
+     *
      * @param date the date to add time
      * @param side left or right
      */
